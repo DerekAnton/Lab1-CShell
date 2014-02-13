@@ -54,19 +54,24 @@ int main() {
     } while (timeout < 0 || timeout > 9);
     // end parsing code
     
+    // Start my code //
 
-    ////////////////////////////////////////////////////////
-    //                                                    //
-    // TODO: use cmdTokens, count, parallel, and timeout  //
-    // to implement the rest of closh                     //
-    //                                                    //
-    // /////////////////////////////////////////////////////
+    int counter = 0;
+    int childID = 0;
+    while(counter < count)
+    {
+      childID = fork();
 
-    // just executes the given command once - REPLACE THIS CODE WITH YOUR OWN
-    execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program
-    printf("Can't execute %s\n", cmdTokens[0]); // only reached if running the program failed
-    exit(1);
-
+      if(childID == 0)
+      {
+        execvp(cmdTokens[0], cmdTokens); // replaces the current process with the given program
+        printf("Can't execute %s\n", cmdTokens[0]); // only reached if running the program failed
+        exit(1);
+      }
+      counter++;
+    }
+    
+    // End my code //
   }
 }
 
